@@ -22,15 +22,23 @@ class SocialAuthController extends Controller
 
         $isFirstUser = User::query()->count() === 0;
 
-        $user = User::query()->updateOrCreate(
-            ['google_id' => $googleUser->getId()],
-            [
+        $user = User::query()->where('google_id', $googleUser->getId())
+            ->orWhere('email', $googleUser->getEmail())
+            ->first();
+
+        if ($user) {
+            $user->update([
+                'google_id' => $googleUser->getId(),
+                'avatar_url' => $googleUser->getAvatar(),
+            ]);
+        } else {
+            $user = User::query()->create([
                 'name' => $googleUser->getName(),
                 'email' => $googleUser->getEmail(),
                 'avatar_url' => $googleUser->getAvatar(),
                 'google_id' => $googleUser->getId(),
-            ]
-        );
+            ]);
+        }
 
         if ($isFirstUser) {
             $user->assignRole(UserRole::Sysadmin->value);
