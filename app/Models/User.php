@@ -96,4 +96,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(ExchangeRequest::class);
     }
+
+    public function deliveryRequests(): HasMany
+    {
+        return $this->hasMany(DeliveryRequest::class);
+    }
 }

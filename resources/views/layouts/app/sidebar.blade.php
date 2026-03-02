@@ -25,6 +25,15 @@
                         {{ __('My Requests') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
+
+                <flux:sidebar.group :heading="__('Delivery')" class="grid">
+                    <flux:sidebar.item icon="archive-box" :href="route('delivery.board')" :current="request()->routeIs('delivery.board')" wire:navigate>
+                        {{ __('Browse Deliveries') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="clipboard-document-list" :href="route('delivery.my-requests')" :current="request()->routeIs('delivery.my-requests')" wire:navigate>
+                        {{ __('My Requests') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
             </flux:sidebar.nav>
 
             <flux:spacer />
