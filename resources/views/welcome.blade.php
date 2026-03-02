@@ -52,6 +52,7 @@
                 {{-- Desktop nav links --}}
                 <div class="hidden items-center gap-6 md:flex">
                     <a href="{{ route('exchange.board') }}" class="text-sm font-semibold text-zinc-700 transition-colors hover:text-navy-800">Exchange</a>
+                    <a href="#" class="text-sm font-semibold text-zinc-700 transition-colors hover:text-navy-800">Packages</a>
                 </div>
 
                 {{-- Desktop auth links --}}
@@ -102,6 +103,7 @@
         >
             <div class="flex flex-col gap-1">
                 <a href="{{ route('exchange.board') }}" class="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50">Exchange</a>
+                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50">Packages</a>
                 <div class="my-2 border-t border-zinc-100"></div>
                 @auth
                     <a href="{{ route('dashboard') }}" class="rounded-md bg-navy-800 px-3 py-2 text-center text-sm font-medium text-white hover:bg-navy-700">Dashboard</a>
@@ -119,7 +121,7 @@
             <div class="w-full">
                 {{-- Badge --}}
                 <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-600">
-                    🇷🇼 For diaspora communities in Rwanda
+                    For diaspora communities in Rwanda
                 </div>
 
                 {{-- Headline --}}
@@ -149,14 +151,14 @@
                 </div>
 
                 {{-- Community badges --}}
-                <div class="mt-10 flex flex-wrap justify-center gap-2">
+                {{-- <div class="mt-10 flex flex-wrap justify-center gap-2">
                     <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-600">🇳🇬 Nigerians in 🇷🇼 Rwanda</span>
                     <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-600">🇰🇪 Kenyans in 🇷🇼 Rwanda</span>
                     <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-600">🇹🇿 Tanzanians in 🇷🇼 Rwanda</span>
                     <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-600">🇺🇬 Ugandans in 🇷🇼 Rwanda</span>
                     <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-600">🇧🇯 Beninois in 🇷🇼 Rwanda</span>
                     <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-600">🇨🇲 Cameroonians in 🇷🇼 Rwanda</span>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -170,53 +172,94 @@
             >Everything your community needs</h2>
             <p class="mx-auto mb-12 max-w-xl text-center text-zinc-500">Built for diaspora communities, by people who understand the challenges of living abroad.</p>
             <div class="grid gap-6 md:grid-cols-3">
-                {{-- Card 1 --}}
-                <div class="rounded-3xl bg-navy-50 p-7 shadow-sm transition-shadow hover:shadow-md">
-                    <div class="mb-4 flex size-12 items-center justify-center rounded-xl bg-white shadow-sm">
-                        <svg class="size-6 text-navy-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                {{-- Card 1: P2P Exchange --}}
+                <div class="relative flex min-h-[340px] flex-col justify-between overflow-hidden rounded-3xl bg-navy-800 p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                    <div class="absolute -bottom-6 -right-6 size-40 animate-float text-white opacity-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/>
                         </svg>
                     </div>
-                    <p class="mb-2 text-xs font-semibold uppercase tracking-widest text-emerald-600">Live rates from 7 currencies</p>
-                    <h3 class="mb-2 text-lg font-semibold text-navy-800">P2P Currency Exchange</h3>
-                    <p class="text-sm leading-relaxed text-zinc-500">
-                        Post and find currency exchange requests within your diaspora community. No middlemen, no hidden fees — just community trust.
-                    </p>
+                    <div>
+                        <div class="mb-5 flex size-12 items-center justify-center rounded-xl bg-white/20">
+                            <svg class="size-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/>
+                            </svg>
+                        </div>
+                        <p class="mb-2 text-xs font-semibold uppercase tracking-widest text-white/60">Live rates · No middlemen</p>
+                        <h3 class="mb-3 text-xl font-bold text-white">P2P Currency Exchange</h3>
+                        <p class="text-sm leading-relaxed text-white/70">
+                            Post and find exchange requests within your diaspora community. No fees, just community trust.
+                        </p>
+                    </div>
+                    <a href="{{ route('exchange.board') }}" class="mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-navy-800 transition-colors hover:bg-white/90">
+                        Browse Exchange
+                        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                        </svg>
+                    </a>
                 </div>
 
-                {{-- Card 2 --}}
-                <div class="rounded-3xl bg-navy-50 p-7 shadow-sm transition-shadow hover:shadow-md">
-                    <div class="mb-4 flex size-12 items-center justify-center rounded-xl bg-white shadow-sm">
-                        <svg class="size-6 text-navy-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/>
+                {{-- Card 2: P2P Package Delivery --}}
+                <div class="relative flex min-h-[340px] flex-col justify-between overflow-hidden rounded-3xl bg-violet-700 p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                    <div class="absolute -bottom-6 -right-6 size-40 animate-float text-white opacity-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"/>
                         </svg>
                     </div>
-                    <p class="mb-2 text-xs font-semibold uppercase tracking-widest text-emerald-600">Contact revealed only after match</p>
-                    <h3 class="mb-2 text-lg font-semibold text-navy-800">Verified Members</h3>
-                    <p class="text-sm leading-relaxed text-zinc-500">
-                        Admin-verified members give you confidence about who you're dealing with. Contact details revealed only after both sides agree.
-                    </p>
+                    <div>
+                        <div class="mb-5 flex size-12 items-center justify-center rounded-xl bg-white/20">
+                            <svg class="size-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"/>
+                            </svg>
+                        </div>
+                        <p class="mb-2 text-xs font-semibold uppercase tracking-widest text-white/60">Community couriers · Door to door</p>
+                        <h3 class="mb-3 text-xl font-bold text-white">P2P Package Delivery</h3>
+                        <p class="text-sm leading-relaxed text-white/70">
+                            Travelling between countries? Help a neighbour deliver a document or small package — or find someone already on your route.
+                        </p>
+                    </div>
+                    <a href="{{ route('register') }}" class="mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-violet-700 transition-colors hover:bg-white/90">
+                        Get Started
+                        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                        </svg>
+                    </a>
                 </div>
 
-                {{-- Card 3 --}}
-                <div class="rounded-3xl bg-navy-50 p-7 shadow-sm transition-shadow hover:shadow-md">
-                    <div class="mb-4 flex size-12 items-center justify-center rounded-xl bg-white shadow-sm">
-                        <svg class="size-6 text-navy-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                {{-- Card 3: Community Marketplace --}}
+                <div class="relative flex min-h-[340px] flex-col justify-between overflow-hidden rounded-3xl bg-gold-600 p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                    <div class="absolute -bottom-6 -right-6 size-40 animate-float text-white opacity-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
                         </svg>
                     </div>
-                    <p class="mb-2 text-xs font-semibold uppercase tracking-widest text-emerald-600">Rates updated every hour</p>
-                    <h3 class="mb-2 text-lg font-semibold text-navy-800">Live Exchange Rates</h3>
-                    <p class="text-sm leading-relaxed text-zinc-500">
-                        Compare your offered rate against the live official rate. Always know if you're getting a fair deal before you commit.
-                    </p>
+                    <div>
+                        <div class="mb-5 flex size-12 items-center justify-center rounded-xl bg-white/20">
+                            <svg class="size-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
+                            </svg>
+                        </div>
+                        <p class="mb-2 text-xs font-semibold uppercase tracking-widest text-white/60">Buy · Sell · Trade</p>
+                        <h3 class="mb-3 text-xl font-bold text-white">Community Marketplace</h3>
+                        <p class="text-sm leading-relaxed text-white/70">
+                            Sell items you no longer need, or find goods not readily available in your new country.
+                        </p>
+                    </div>
+                    <div class="mt-6">
+                        <span class="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold text-white/80">
+                            <svg class="size-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                            </svg>
+                            Coming Soon
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     {{-- How it works --}}
-    <section id="how-it-works" class="bg-navy-50 py-20">
+    <section id="how-it-works" class="bg-[#f8f9fc] py-20">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2
                 class="mb-3 text-center text-3xl font-bold text-navy-800 sm:text-4xl"
@@ -224,57 +267,172 @@
             >Get started in minutes</h2>
             <p class="mx-auto mb-12 max-w-xl text-center text-zinc-500">Simple, transparent, and community-driven.</p>
             <div class="grid gap-6 md:grid-cols-3">
-                <div class="relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm">
-                    <div class="absolute top-4 right-5 text-6xl font-black leading-none text-navy-800 opacity-[0.07]">1</div>
-                    <div class="mb-3 flex size-10 items-center justify-center rounded-xl bg-gold-50">
-                        <svg class="size-5 text-gold-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
-                        </svg>
+                {{-- Step 1 --}}
+                <div class="relative flex min-h-[320px] flex-col justify-between overflow-hidden rounded-3xl bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                    <div class="absolute -bottom-4 -right-2 select-none text-[9rem] font-black leading-none text-navy-800 opacity-[0.04]">1</div>
+                    <div>
+                        <p class="mb-5 text-xs font-semibold uppercase tracking-widest text-navy-800/40">Step 01</p>
+                        <div class="mb-5 flex size-12 items-center justify-center rounded-xl bg-navy-800">
+                            <svg class="size-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold text-navy-800" style="letter-spacing: -0.02em">Create your account</h3>
+                        <p class="text-sm leading-relaxed text-zinc-500">
+                            Sign up with Google or email. Takes 30 seconds — no lengthy forms, no waiting.
+                        </p>
                     </div>
-                    <h3 class="mb-2 text-xl font-semibold text-navy-800" style="letter-spacing: -0.02em">Create your account</h3>
-                    <p class="text-sm leading-relaxed text-zinc-500">
-                        Sign up with Google or email. Takes 30 seconds — no lengthy forms, no waiting.
-                    </p>
+                    <a href="{{ route('register') }}" class="mt-6 inline-flex w-fit items-center gap-2 text-sm font-semibold text-navy-800 transition-colors hover:text-navy-600">
+                        Get started free
+                        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                        </svg>
+                    </a>
                 </div>
-                <div class="relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm">
-                    <div class="absolute top-4 right-5 text-6xl font-black leading-none text-navy-800 opacity-[0.07]">2</div>
-                    <div class="mb-3 flex size-10 items-center justify-center rounded-xl bg-gold-50">
-                        <svg class="size-5 text-gold-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
-                        </svg>
+
+                {{-- Step 2 --}}
+                <div class="relative flex min-h-[320px] flex-col justify-between overflow-hidden rounded-3xl bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                    <div class="absolute -bottom-4 -right-2 select-none text-[9rem] font-black leading-none text-navy-800 opacity-[0.04]">2</div>
+                    <div>
+                        <p class="mb-5 text-xs font-semibold uppercase tracking-widest text-navy-800/40">Step 02</p>
+                        <div class="mb-5 flex size-12 items-center justify-center rounded-xl bg-navy-800">
+                            <svg class="size-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold text-navy-800" style="letter-spacing: -0.02em">Post or browse requests</h3>
+                        <p class="text-sm leading-relaxed text-zinc-500">
+                            List what you want to exchange, or find an existing request that matches your needs. Compare rates in real time.
+                        </p>
                     </div>
-                    <h3 class="mb-2 text-xl font-semibold text-navy-800" style="letter-spacing: -0.02em">Post or browse requests</h3>
-                    <p class="text-sm leading-relaxed text-zinc-500">
-                        List what you want to exchange, or find an existing request that matches your needs. Compare rates in real time.
-                    </p>
+                    <a href="{{ route('exchange.board') }}" class="mt-6 inline-flex w-fit items-center gap-2 text-sm font-semibold text-navy-800 transition-colors hover:text-navy-600">
+                        Browse exchange
+                        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                        </svg>
+                    </a>
                 </div>
-                <div class="relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm">
-                    <div class="absolute top-4 right-5 text-6xl font-black leading-none text-navy-800 opacity-[0.07]">3</div>
-                    <div class="mb-3 flex size-10 items-center justify-center rounded-xl bg-gold-50">
-                        <svg class="size-5 text-gold-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/>
-                        </svg>
+
+                {{-- Step 3 --}}
+                <div class="relative flex min-h-[320px] flex-col justify-between overflow-hidden rounded-3xl bg-navy-800 p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                    <div class="absolute -bottom-4 -right-2 select-none text-[9rem] font-black leading-none text-white opacity-[0.06]">3</div>
+                    <div>
+                        <p class="mb-5 text-xs font-semibold uppercase tracking-widest text-white/50">Step 03</p>
+                        <div class="mb-5 flex size-12 items-center justify-center rounded-xl bg-white/20">
+                            <svg class="size-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/>
+                            </svg>
+                        </div>
+                        <h3 class="mb-3 text-xl font-bold text-white" style="letter-spacing: -0.02em">Match and exchange</h3>
+                        <p class="text-sm leading-relaxed text-white/70">
+                            Express interest, accept a peer, and get each other's contact details. Complete the exchange your way.
+                        </p>
                     </div>
-                    <h3 class="mb-2 text-xl font-semibold text-navy-800" style="letter-spacing: -0.02em">Match and exchange</h3>
-                    <p class="text-sm leading-relaxed text-zinc-500">
-                        Express interest, accept a peer, and get each other's contact details. Complete the exchange your way.
-                    </p>
+                    <a href="{{ route('register') }}" class="mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-navy-800 transition-colors hover:bg-white/90">
+                        Join Free
+                        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     {{-- Community strip --}}
-    <section class="border-y border-zinc-100 bg-white py-10">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <p class="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-zinc-400">Serving 6 diaspora communities across Rwanda</p>
-            <div class="flex flex-wrap items-center justify-center gap-3">
-                <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-1.5 text-sm font-medium text-zinc-600">🇳🇬 Nigerians in 🇷🇼 Rwanda</span>
-                <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-1.5 text-sm font-medium text-zinc-600">🇰🇪 Kenyans in 🇷🇼 Rwanda</span>
-                <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-1.5 text-sm font-medium text-zinc-600">🇹🇿 Tanzanians in 🇷🇼 Rwanda</span>
-                <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-1.5 text-sm font-medium text-zinc-600">🇺🇬 Ugandans in 🇷🇼 Rwanda</span>
-                <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-1.5 text-sm font-medium text-zinc-600">🇧🇯 Beninois in 🇷🇼 Rwanda</span>
-                <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-1.5 text-sm font-medium text-zinc-600">🇨🇲 Cameroonians in 🇷🇼 Rwanda</span>
+    <section class="border-y border-zinc-100 bg-white py-16">
+        <p class="mb-8 text-center text-xs font-semibold uppercase tracking-widest text-zinc-400">Serving diaspora communities across Rwanda</p>
+        <div
+            class="overflow-hidden py-4"
+            style="mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent)"
+        >
+            <div class="flex w-max animate-marquee gap-5 px-5">
+                {{-- Original set --}}
+                <a href="{{ route('exchange.board') }}" class="flex w-44 flex-shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50 p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                    <span class="fi fi-ng" style="font-size: 3.5rem; line-height: 1; border-radius: 6px;"></span>
+                    <div>
+                        <p class="text-sm font-bold text-navy-800">Nigerians</p>
+                        <p class="text-xs text-zinc-400">in Rwanda</p>
+                    </div>
+                </a>
+                <a href="{{ route('exchange.board') }}" class="flex w-44 flex-shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50 p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                    <span class="fi fi-ke" style="font-size: 3.5rem; line-height: 1; border-radius: 6px;"></span>
+                    <div>
+                        <p class="text-sm font-bold text-navy-800">Kenyans</p>
+                        <p class="text-xs text-zinc-400">in Rwanda</p>
+                    </div>
+                </a>
+                <a href="{{ route('exchange.board') }}" class="flex w-44 flex-shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50 p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                    <span class="fi fi-tz" style="font-size: 3.5rem; line-height: 1; border-radius: 6px;"></span>
+                    <div>
+                        <p class="text-sm font-bold text-navy-800">Tanzanians</p>
+                        <p class="text-xs text-zinc-400">in Rwanda</p>
+                    </div>
+                </a>
+                <a href="{{ route('exchange.board') }}" class="flex w-44 flex-shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50 p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                    <span class="fi fi-ug" style="font-size: 3.5rem; line-height: 1; border-radius: 6px;"></span>
+                    <div>
+                        <p class="text-sm font-bold text-navy-800">Ugandans</p>
+                        <p class="text-xs text-zinc-400">in Rwanda</p>
+                    </div>
+                </a>
+                <a href="{{ route('exchange.board') }}" class="flex w-44 flex-shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50 p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                    <span class="fi fi-bj" style="font-size: 3.5rem; line-height: 1; border-radius: 6px;"></span>
+                    <div>
+                        <p class="text-sm font-bold text-navy-800">Beninois</p>
+                        <p class="text-xs text-zinc-400">in Rwanda</p>
+                    </div>
+                </a>
+                <a href="{{ route('exchange.board') }}" class="flex w-44 flex-shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50 p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                    <span class="fi fi-cm" style="font-size: 3.5rem; line-height: 1; border-radius: 6px;"></span>
+                    <div>
+                        <p class="text-sm font-bold text-navy-800">Cameroonians</p>
+                        <p class="text-xs text-zinc-400">in Rwanda</p>
+                    </div>
+                </a>
+                {{-- Duplicate set for seamless loop --}}
+                <a href="{{ route('exchange.board') }}" class="flex w-44 flex-shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50 p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                    <span class="fi fi-ng" style="font-size: 3.5rem; line-height: 1; border-radius: 6px;"></span>
+                    <div>
+                        <p class="text-sm font-bold text-navy-800">Nigerians</p>
+                        <p class="text-xs text-zinc-400">in Rwanda</p>
+                    </div>
+                </a>
+                <a href="{{ route('exchange.board') }}" class="flex w-44 flex-shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50 p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                    <span class="fi fi-ke" style="font-size: 3.5rem; line-height: 1; border-radius: 6px;"></span>
+                    <div>
+                        <p class="text-sm font-bold text-navy-800">Kenyans</p>
+                        <p class="text-xs text-zinc-400">in Rwanda</p>
+                    </div>
+                </a>
+                <a href="{{ route('exchange.board') }}" class="flex w-44 flex-shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50 p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                    <span class="fi fi-tz" style="font-size: 3.5rem; line-height: 1; border-radius: 6px;"></span>
+                    <div>
+                        <p class="text-sm font-bold text-navy-800">Tanzanians</p>
+                        <p class="text-xs text-zinc-400">in Rwanda</p>
+                    </div>
+                </a>
+                <a href="{{ route('exchange.board') }}" class="flex w-44 flex-shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50 p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                    <span class="fi fi-ug" style="font-size: 3.5rem; line-height: 1; border-radius: 6px;"></span>
+                    <div>
+                        <p class="text-sm font-bold text-navy-800">Ugandans</p>
+                        <p class="text-xs text-zinc-400">in Rwanda</p>
+                    </div>
+                </a>
+                <a href="{{ route('exchange.board') }}" class="flex w-44 flex-shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50 p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                    <span class="fi fi-bj" style="font-size: 3.5rem; line-height: 1; border-radius: 6px;"></span>
+                    <div>
+                        <p class="text-sm font-bold text-navy-800">Beninois</p>
+                        <p class="text-xs text-zinc-400">in Rwanda</p>
+                    </div>
+                </a>
+                <a href="{{ route('exchange.board') }}" class="flex w-44 flex-shrink-0 flex-col items-center gap-3 rounded-2xl border border-zinc-100 bg-zinc-50 p-6 text-center shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+                    <span class="fi fi-cm" style="font-size: 3.5rem; line-height: 1; border-radius: 6px;"></span>
+                    <div>
+                        <p class="text-sm font-bold text-navy-800">Cameroonians</p>
+                        <p class="text-xs text-zinc-400">in Rwanda</p>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
