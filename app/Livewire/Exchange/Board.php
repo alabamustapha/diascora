@@ -133,17 +133,20 @@ class Board extends Component
             return;
         }
 
-        $interest = ExchangeInterest::create([
-            'exchange_request_id' => $request->id,
-            'user_id' => Auth::id(),
-            'comment' => $this->interestComment,
-            'payment_method_sending' => $this->interestPaymentSending,
-            'payment_method_receiving' => $this->interestPaymentReceiving,
-            'status' => 'pending',
-        ]);
+        $interest = ExchangeInterest::updateOrCreate(
+            ['exchange_request_id' => $request->id, 'user_id' => Auth::id()],
+            [
+                'comment' => $this->interestComment,
+                'payment_method_sending' => $this->interestPaymentSending,
+                'payment_method_receiving' => $this->interestPaymentReceiving,
+                'status' => 'pending',
+            ]
+        );
 
-        $request->load('user');
-        $request->user->notify(new InterestReceived($interest));
+        if ($interest->wasRecentlyCreated) {
+            $request->load('user');
+            $request->user->notify(new InterestReceived($interest));
+        }
 
         $this->showInterestModal = false;
         $this->selectedRequestId = null;
