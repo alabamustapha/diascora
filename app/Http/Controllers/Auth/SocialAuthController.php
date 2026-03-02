@@ -18,34 +18,40 @@ class SocialAuthController extends Controller
 
     public function handleGoogleCallback(): RedirectResponse
     {
-        $googleUser = Socialite::driver('google')->user();
 
-        $isFirstUser = User::query()->count() === 0;
+        try {
+            $googleUser = Socialite::driver('google')->user();
 
-        $user = User::query()->where('google_id', $googleUser->getId())
-            ->orWhere('email', $googleUser->getEmail())
-            ->first();
+            $isFirstUser = User::query()->count() === 0;
 
-        if ($user) {
-            $user->update([
-                'google_id' => $googleUser->getId(),
-                'avatar_url' => $googleUser->getAvatar(),
-            ]);
-        } else {
-            $user = User::query()->create([
-                'name' => $googleUser->getName(),
-                'email' => $googleUser->getEmail(),
-                'avatar_url' => $googleUser->getAvatar(),
-                'google_id' => $googleUser->getId(),
-            ]);
+            $user = User::query()->where('google_id', $googleUser->getId())
+                ->orWhere('email', $googleUser->getEmail())
+                ->first();
+
+            if ($user) {
+                $user->update([
+                    'google_id' => $googleUser->getId(),
+                    'avatar_url' => $googleUser->getAvatar(),
+                ]);
+            } else {
+                $user = User::query()->create([
+                    'name' => $googleUser->getName(),
+                    'email' => $googleUser->getEmail(),
+                    'avatar_url' => $googleUser->getAvatar(),
+                    'google_id' => $googleUser->getId(),
+                ]);
+            }
+
+            if ($isFirstUser) {
+                $user->assignRole(UserRole::Sysadmin->value);
+            }
+
+            Auth::login($user, true);
+
+            return redirect()->intended(route('dashboard'));
+        } catch (\Laravel\Socialite\Two\InvalidStateException $e) {
+            return redirect('/login')->withErrors(['google' => 'Authentication failed, please try again.']);
         }
-
-        if ($isFirstUser) {
-            $user->assignRole(UserRole::Sysadmin->value);
-        }
-
-        Auth::login($user, true);
-
-        return redirect()->intended(route('dashboard'));
+        
     }
 }
