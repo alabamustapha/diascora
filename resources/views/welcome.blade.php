@@ -102,14 +102,14 @@
             class="border-t border-zinc-100 bg-white px-4 pb-4 pt-2 md:hidden"
         >
             <div class="flex flex-col gap-1">
-                <a href="{{ route('exchange.board') }}" class="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50">Exchange</a>
-                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50">Packages</a>
+                <a href="{{ route('exchange.board') }}" @click="open = false" class="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50">Exchange</a>
+                <a href="#" @click="open = false" class="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50">Packages</a>
                 <div class="my-2 border-t border-zinc-100"></div>
                 @auth
-                    <a href="{{ route('dashboard') }}" class="rounded-md bg-navy-800 px-3 py-2 text-center text-sm font-medium text-white hover:bg-navy-700">Dashboard</a>
+                    <a href="{{ route('dashboard') }}" @click="open = false" class="rounded-md bg-navy-800 px-3 py-2 text-center text-sm font-medium text-white hover:bg-navy-700">Dashboard</a>
                 @else
-                    <a href="{{ route('login') }}" class="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50">Log in</a>
-                    <a href="{{ route('register') }}" class="rounded-md bg-navy-800 px-3 py-2 text-center text-sm font-medium text-white hover:bg-navy-700">Get Started</a>
+                    <a href="{{ route('login') }}" @click="open = false" class="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50">Log in</a>
+                    <a href="{{ route('register') }}" @click="open = false" class="rounded-md bg-navy-800 px-3 py-2 text-center text-sm font-medium text-white hover:bg-navy-700">Get Started</a>
                 @endauth
             </div>
         </div>
