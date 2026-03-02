@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.30s>
     <flux:dropdown position="bottom" align="end">
         <flux:button variant="ghost" square class="relative" aria-label="Notifications">
             <flux:icon name="bell" variant="outline" class="size-5" />
