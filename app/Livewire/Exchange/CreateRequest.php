@@ -34,6 +34,10 @@ class CreateRequest extends Component
 
     public int $expires_in_days = 7;
 
+    public int $step = 1;
+
+    public bool $submitting = false;
+
     public function mount(): void
     {
         $this->from_currency = Currency::NGN->value;
@@ -110,8 +114,49 @@ class CreateRequest extends Component
         }
     }
 
+    /** @return array<string, array<string>> */
+    private function rulesForStep(int $step): array
+    {
+        return match ($step) {
+            1 => [
+                'from_currency' => ['required', 'string', 'size:3'],
+                'to_currency' => ['required', 'string', 'size:3'],
+            ],
+            2 => [
+                'from_amount' => ['required', 'numeric', 'min:0.01'],
+                'to_amount' => ['required', 'numeric', 'min:0.01'],
+                'official_rate' => ['required', 'numeric', 'min:0'],
+                'offered_rate' => ['required', 'numeric', 'min:0'],
+                'payment_method_sending' => ['required', 'string'],
+                'payment_method_receiving' => ['required', 'string'],
+            ],
+            default => [
+                'notes' => ['nullable', 'string', 'max:1000'],
+                'is_anonymous' => ['boolean'],
+                'expires_in_days' => ['required', 'integer', 'min:1', 'max:30'],
+            ],
+        };
+    }
+
+    public function nextStep(): void
+    {
+        $this->validate($this->rulesForStep($this->step));
+        $this->step++;
+    }
+
+    public function prevStep(): void
+    {
+        $this->step = max(1, $this->step - 1);
+    }
+
     public function create(): void
     {
+        if ($this->submitting) {
+            return;
+        }
+
+        $this->submitting = true;
+
         $this->validate([
             'from_currency' => ['required', 'string', 'size:3'],
             'to_currency' => ['required', 'string', 'size:3'],
@@ -143,7 +188,6 @@ class CreateRequest extends Component
         ]);
 
         $this->dispatch('exchange-request-created');
-        $this->dispatch('close-modal');
     }
 
     public function render()

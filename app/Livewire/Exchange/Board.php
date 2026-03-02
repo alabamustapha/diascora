@@ -11,6 +11,7 @@ use App\Services\ExchangeRateService;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -158,6 +159,13 @@ class Board extends Component
         }
 
         $this->showCreateModal = true;
+    }
+
+    #[On('exchange-request-created')]
+    public function onRequestCreated(): void
+    {
+        $this->showCreateModal = false;
+        unset($this->requests);
     }
 
     public function render()
