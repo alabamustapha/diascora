@@ -6,6 +6,7 @@ use App\Enums\Currency;
 use App\Enums\PaymentMethod;
 use App\Models\ExchangeInterest;
 use App\Models\ExchangeRequest;
+use App\Notifications\InterestReceived;
 use App\Services\ExchangeRateService;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
@@ -131,7 +132,7 @@ class Board extends Component
             return;
         }
 
-        ExchangeInterest::create([
+        $interest = ExchangeInterest::create([
             'exchange_request_id' => $request->id,
             'user_id' => Auth::id(),
             'comment' => $this->interestComment,
@@ -139,6 +140,9 @@ class Board extends Component
             'payment_method_receiving' => $this->interestPaymentReceiving,
             'status' => 'pending',
         ]);
+
+        $request->load('user');
+        $request->user->notify(new InterestReceived($interest));
 
         $this->showInterestModal = false;
         $this->selectedRequestId = null;

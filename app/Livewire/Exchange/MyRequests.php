@@ -4,6 +4,8 @@ namespace App\Livewire\Exchange;
 
 use App\Models\ExchangeInterest;
 use App\Models\ExchangeRequest;
+use App\Notifications\InterestAccepted;
+use App\Notifications\InterestRejected;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -99,6 +101,11 @@ class MyRequests extends Component
         }
 
         DB::transaction(function () use ($interest, $request): void {
+            $rejectedInterests = $request->interests()
+                ->with('user')
+                ->where('id', '!=', $interest->id)
+                ->get();
+
             $request->interests()
                 ->where('id', '!=', $interest->id)
                 ->update(['status' => 'rejected']);
@@ -109,6 +116,13 @@ class MyRequests extends Component
                 'status' => 'matched',
                 'accepted_interest_id' => $interest->id,
             ]);
+
+            $interest->load('user');
+            $interest->user->notify(new InterestAccepted($interest));
+
+            foreach ($rejectedInterests as $rejected) {
+                $rejected->user->notify(new InterestRejected($rejected));
+            }
         });
 
         unset($this->myRequests, $this->selectedRequest);

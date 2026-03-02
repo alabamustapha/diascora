@@ -4,9 +4,9 @@
         @include('partials.head')
     </head>
     <body class="min-h-screen bg-zinc-50 dark:bg-zinc-900">
-        <flux:sidebar sticky collapsible="mobile" class="border-e border-zinc-100 bg-white dark:border-zinc-700 dark:bg-zinc-900">
+        <flux:sidebar sticky collapsible="mobile" class="border-e border-zinc-100 bg-white dark:border-zinc-700 dark:bg-zinc-900" data-push-enabled="true">
             <flux:sidebar.header>
-                <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
+                <x-app-logo :sidebar="true" href="{{ route('home') }}" wire:navigate />
                 <flux:sidebar.collapse class="lg:hidden" />
             </flux:sidebar.header>
 
@@ -29,6 +29,8 @@
 
             <flux:spacer />
 
+            <livewire:notification-bell />
+
             <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
         </flux:sidebar>
 
@@ -37,6 +39,8 @@
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
             <flux:spacer />
+
+            <livewire:notification-bell />
 
             <flux:dropdown position="top" align="end">
                 <flux:profile
