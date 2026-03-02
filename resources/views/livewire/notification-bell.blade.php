@@ -36,7 +36,16 @@
                         'interest_received' => 'New interest',
                         'interest_accepted' => 'Interest accepted',
                         'interest_rejected' => 'Request filled',
+                        'delivery_offer_received' => 'New delivery offer',
+                        'delivery_offer_accepted' => 'Offer accepted',
+                        'delivery_offer_rejected' => 'Offer not selected',
                         default => 'Notification',
+                    };
+
+                    $subtitle = match (true) {
+                        isset($data['from_currency'], $data['to_currency']) => $data['from_currency'] . ' → ' . $data['to_currency'],
+                        isset($data['destination_country']) => \App\Enums\DeliveryCountry::tryFrom($data['destination_country'])?->label() ?? $data['destination_country'],
+                        default => '',
                     };
                 @endphp
 
@@ -56,7 +65,7 @@
                             <span class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">{{ $label }}</span>
                         </div>
                         <p class="text-sm text-zinc-800 dark:text-zinc-200 truncate pl-3.5">
-                            {{ $data['from_currency'] }} → {{ $data['to_currency'] }}
+                            {{ $subtitle }}
                         </p>
                         <p class="text-xs text-zinc-400 dark:text-zinc-500 pl-3.5">
                             {{ $notification->created_at->diffForHumans() }}
