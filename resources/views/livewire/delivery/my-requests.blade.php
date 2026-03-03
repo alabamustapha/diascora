@@ -37,9 +37,9 @@
 
     {{-- Empty state --}}
     @if($this->myRequests->isEmpty())
-        <div class="flex flex-1 items-center justify-center rounded-xl border border-zinc-200 py-20 text-center">
+        <div class="flex flex-1 items-center justify-center rounded-xl border border-zinc-200 py-20 text-center dark:border-zinc-700">
             <div>
-                <flux:icon name="clipboard-document-list" class="mx-auto mb-3 size-10 text-zinc-300" />
+                <flux:icon name="clipboard-document-list" class="mx-auto mb-3 size-10 text-zinc-300 dark:text-zinc-600" />
                 <flux:heading>
                     {{ $search || $filterStatus ? __('No requests match your filters') : __('No delivery requests yet') }}
                 </flux:heading>
@@ -60,22 +60,22 @@
 
     {{-- Table --}}
     @else
-        <div class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm">
+        <div class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-800">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead>
-                        <tr class="border-b border-zinc-100 bg-zinc-50 text-left">
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Destination') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Description') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Weight') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Payment') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Status') }}</th>
-                            <th class="px-4 py-3 text-center font-semibold text-zinc-600">{{ __('Offers') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Expires') }}</th>
-                            <th class="px-4 py-3 text-right font-semibold text-zinc-600">{{ __('Actions') }}</th>
+                        <tr class="border-b border-zinc-100 bg-zinc-50 text-left dark:border-zinc-700 dark:bg-zinc-700">
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Destination') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Description') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Weight') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Payment') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Status') }}</th>
+                            <th class="px-4 py-3 text-center font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Offers') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Expires') }}</th>
+                            <th class="px-4 py-3 text-right font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Actions') }}</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-zinc-100">
+                    <tbody class="divide-y divide-zinc-100 dark:divide-zinc-700">
                         @foreach($this->myRequests as $request)
                             @php
                                 $displayStatus = $this->displayStatus($request);
@@ -88,25 +88,25 @@
                                     default   => 'zinc',
                                 };
                             @endphp
-                            <tr wire:key="request-{{ $request->id }}" class="transition-colors odd:bg-white even:bg-zinc-50/50 hover:bg-navy-50">
+                            <tr wire:key="request-{{ $request->id }}" class="transition-colors odd:bg-white even:bg-zinc-50/50 hover:bg-navy-50 dark:odd:bg-zinc-800 dark:even:bg-zinc-700/30 dark:hover:bg-zinc-700">
 
                                 {{-- Destination --}}
-                                <td class="px-4 py-3 font-medium text-zinc-900">
+                                <td class="px-4 py-3 font-medium text-zinc-900 dark:text-white">
                                     {{ \App\Enums\DeliveryCountry::tryFrom($request->destination_country)?->label() ?? $request->destination_country }}
                                 </td>
 
                                 {{-- Description --}}
-                                <td class="max-w-xs px-4 py-3 text-zinc-600">
+                                <td class="max-w-xs px-4 py-3 text-zinc-600 dark:text-zinc-300">
                                     <span class="line-clamp-2">{{ $request->description }}</span>
                                 </td>
 
                                 {{-- Weight --}}
-                                <td class="px-4 py-3 text-zinc-700">{{ number_format((float) $request->weight_kg, 2) }} kg</td>
+                                <td class="px-4 py-3 text-zinc-700 dark:text-zinc-200">{{ number_format((float) $request->weight_kg, 2) }} kg</td>
 
                                 {{-- Payment --}}
-                                <td class="px-4 py-3 text-zinc-700">
+                                <td class="px-4 py-3 text-zinc-700 dark:text-zinc-200">
                                     <div class="font-medium">{{ number_format((float) $request->payment_amount, 2) }} {{ $request->payment_currency }}</div>
-                                    <div class="text-xs text-zinc-400">{{ $request->payment_method }}</div>
+                                    <div class="text-xs text-zinc-400 dark:text-zinc-500">{{ $request->payment_method }}</div>
                                 </td>
 
                                 {{-- Status --}}
@@ -118,19 +118,19 @@
                                 <td class="px-4 py-3 text-center">
                                     <button
                                         wire:click="viewDetails({{ $request->id }})"
-                                        class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100"
+                                        class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-700"
                                     >
-                                        <flux:icon name="users" class="size-3.5 text-zinc-400" />
+                                        <flux:icon name="users" class="size-3.5 text-zinc-400 dark:text-zinc-500" />
                                         {{ $request->offers->count() }}
                                     </button>
                                 </td>
 
                                 {{-- Expires --}}
-                                <td class="px-4 py-3 text-xs {{ $isExpired ? 'font-medium text-amber-600' : 'text-zinc-500' }}">
+                                <td class="px-4 py-3 text-xs {{ $isExpired ? 'font-medium text-amber-600' : 'text-zinc-500 dark:text-zinc-400' }}">
                                     @if($request->expires_at)
                                         {{ $request->expires_at->diffForHumans() }}
                                     @else
-                                        <span class="text-zinc-300">—</span>
+                                        <span class="text-zinc-300 dark:text-zinc-600">—</span>
                                     @endif
                                 </td>
 
@@ -202,31 +202,31 @@
                 </div>
 
                 {{-- Request summary --}}
-                <div class="grid gap-3 rounded-lg bg-zinc-50 p-4 text-sm sm:grid-cols-2">
+                <div class="grid gap-3 rounded-lg bg-zinc-50 p-4 text-sm sm:grid-cols-2 dark:bg-zinc-700/50">
                     <div>
-                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('Weight') }}</div>
-                        <div class="font-semibold text-zinc-900">{{ number_format((float) $req->weight_kg, 2) }} kg</div>
+                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{{ __('Weight') }}</div>
+                        <div class="font-semibold text-zinc-900 dark:text-white">{{ number_format((float) $req->weight_kg, 2) }} kg</div>
                     </div>
                     <div>
-                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('Payment') }}</div>
-                        <div class="font-semibold text-zinc-900">{{ number_format((float) $req->payment_amount, 2) }} {{ $req->payment_currency }} <span class="font-normal text-zinc-400 text-xs">via {{ $req->payment_method }}</span></div>
+                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{{ __('Payment') }}</div>
+                        <div class="font-semibold text-zinc-900 dark:text-white">{{ number_format((float) $req->payment_amount, 2) }} {{ $req->payment_currency }} <span class="font-normal text-zinc-400 text-xs dark:text-zinc-500">via {{ $req->payment_method }}</span></div>
                     </div>
                     @if($req->expires_at)
                         <div>
-                            <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('Expires') }}</div>
-                            <div class="{{ $detailExpired ? 'font-medium text-amber-600' : 'text-zinc-700' }}">{{ $req->expires_at->diffForHumans() }}</div>
+                            <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{{ __('Expires') }}</div>
+                            <div class="{{ $detailExpired ? 'font-medium text-amber-600' : 'text-zinc-700 dark:text-zinc-200' }}">{{ $req->expires_at->diffForHumans() }}</div>
                         </div>
                     @endif
                     <div class="sm:col-span-2">
-                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('Description') }}</div>
-                        <div class="whitespace-pre-line text-zinc-700">{{ $req->description }}</div>
+                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{{ __('Description') }}</div>
+                        <div class="whitespace-pre-line text-zinc-700 dark:text-zinc-200">{{ $req->description }}</div>
                     </div>
                 </div>
 
                 {{-- Item image --}}
                 @if($req->item_image_path)
                     <div>
-                        <div class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('Item photo') }}</div>
+                        <div class="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{{ __('Item photo') }}</div>
                         <img src="{{ $req->imageUrl() }}" alt="{{ __('Item photo') }}" class="max-h-48 rounded-lg object-cover" />
                     </div>
                 @endif
@@ -235,12 +235,12 @@
                 @if($req->status === 'matched' && $this->canSeeContact($req))
                     @php $traveler = $req->acceptedOffer?->user; @endphp
                     @if($traveler)
-                        <div class="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3">
+                        <div class="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 dark:border-blue-800 dark:bg-blue-900/20">
                             <div class="mb-2 flex items-center gap-2">
                                 <flux:icon name="check-circle" class="size-4 text-blue-600" />
-                                <span class="text-sm font-semibold text-blue-800">{{ __('Matched! Traveler contact details:') }}</span>
+                                <span class="text-sm font-semibold text-blue-800 dark:text-blue-300">{{ __('Matched! Traveler contact details:') }}</span>
                             </div>
-                            <div class="grid gap-1 text-sm text-blue-900">
+                            <div class="grid gap-1 text-sm text-blue-900 dark:text-blue-100">
                                 <div><span class="font-medium">{{ __('Name') }}:</span> {{ $traveler->name }}</div>
                                 <div><span class="font-medium">{{ __('Email') }}:</span> {{ $traveler->email }}</div>
                                 @if($traveler->phone_number)
@@ -267,22 +267,22 @@
                     </div>
 
                     @if($req->offers->isEmpty())
-                        <flux:text class="text-sm text-zinc-400">{{ __('No one has offered to carry yet.') }}</flux:text>
+                        <flux:text class="text-sm text-zinc-400 dark:text-zinc-500">{{ __('No one has offered to carry yet.') }}</flux:text>
                     @else
                         <div class="space-y-3">
                             @foreach($req->offers as $offer)
                                 <div
                                     wire:key="modal-offer-{{ $offer->id }}"
-                                    class="flex items-start gap-4 rounded-lg border p-4 {{ $offer->status === 'accepted' ? 'border-green-200 bg-green-50' : ($offer->status === 'rejected' ? 'border-zinc-100 bg-zinc-50 opacity-60' : 'border-zinc-200') }}"
+                                    class="flex items-start gap-4 rounded-lg border p-4 {{ $offer->status === 'accepted' ? 'border-green-200 bg-green-50' : ($offer->status === 'rejected' ? 'border-zinc-100 bg-zinc-50 opacity-60 dark:border-zinc-700 dark:bg-zinc-700/50' : 'border-zinc-200 dark:border-zinc-700') }}"
                                 >
                                     <div class="min-w-0 flex-1">
                                         <div class="flex flex-wrap items-center gap-2">
-                                            <span class="font-medium text-zinc-900">{{ $offer->user->name }}</span>
+                                            <span class="font-medium text-zinc-900 dark:text-white">{{ $offer->user->name }}</span>
                                             <flux:badge size="sm" color="{{ match($offer->status) { 'accepted' => 'green', 'rejected' => 'zinc', default => 'yellow' } }}">
                                                 {{ ucfirst($offer->status) }}
                                             </flux:badge>
                                         </div>
-                                        <p class="mt-1 text-sm text-zinc-600">{{ $offer->message }}</p>
+                                        <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">{{ $offer->message }}</p>
                                     </div>
                                     @if($req->status === 'open' && $offer->status === 'pending')
                                         <flux:button
@@ -300,7 +300,7 @@
                 </div>
 
                 {{-- Modal footer --}}
-                <div class="flex items-center justify-between gap-3 border-t border-zinc-100 pt-4">
+                <div class="flex items-center justify-between gap-3 border-t border-zinc-100 pt-4 dark:border-zinc-700">
                     <div class="flex gap-2">
                         @if($req->status === 'open' && ! $detailExpired)
                             <flux:button

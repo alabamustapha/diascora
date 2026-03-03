@@ -36,9 +36,9 @@
 
     {{-- Empty state --}}
     @if($this->requests->isEmpty())
-        <div class="flex flex-1 items-center justify-center rounded-xl border border-zinc-200 py-20 text-center">
+        <div class="flex flex-1 items-center justify-center rounded-xl border border-zinc-200 py-20 text-center dark:border-zinc-700">
             <div>
-                <flux:icon name="arrows-right-left" class="mx-auto mb-3 size-10 text-zinc-300" />
+                <flux:icon name="arrows-right-left" class="mx-auto mb-3 size-10 text-zinc-300 dark:text-zinc-600" />
                 <flux:heading>{{ __('No exchange requests found') }}</flux:heading>
                 <flux:text class="mt-1">
                     {{ $filterFrom || $filterTo ? __('Try adjusting your currency filters.') : __('Be the first to post a currency exchange request.') }}
@@ -58,22 +58,22 @@
 
     {{-- Table --}}
     @else
-        <div class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm">
+        <div class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-800">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead>
-                        <tr class="border-b border-zinc-100 bg-zinc-50 text-left">
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Pair') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Posted by') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Sending → Receiving') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Rate') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Payment') }}</th>
-                            <th class="px-4 py-3 text-center font-semibold text-zinc-600">{{ __('Interests') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Posted') }}</th>
-                            <th class="px-4 py-3 text-right font-semibold text-zinc-600">{{ __('Action') }}</th>
+                        <tr class="border-b border-zinc-100 bg-zinc-50 text-left dark:border-zinc-700 dark:bg-zinc-700">
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Pair') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Posted by') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Sending → Receiving') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Rate') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Payment') }}</th>
+                            <th class="px-4 py-3 text-center font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Interests') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Posted') }}</th>
+                            <th class="px-4 py-3 text-right font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Action') }}</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-zinc-100">
+                    <tbody class="divide-y divide-zinc-100 dark:divide-zinc-700">
                         @foreach($this->requests as $request)
                             @php
                                 $officialRate = $displayedRates[$request->from_currency] ?? null;
@@ -81,56 +81,56 @@
                                 $rateDiff     = $officialRate ? (($offeredRate - $officialRate) / $officialRate) * 100 : null;
                                 $isOwn        = auth()->check() && auth()->id() === $request->user_id;
                             @endphp
-                            <tr wire:key="request-{{ $request->id }}" class="transition-colors odd:bg-white even:bg-zinc-50/50 hover:bg-navy-50">
+                            <tr wire:key="request-{{ $request->id }}" class="transition-colors odd:bg-white even:bg-zinc-50/50 hover:bg-navy-50 dark:odd:bg-zinc-800 dark:even:bg-zinc-700/30 dark:hover:bg-zinc-700">
 
                                 {{-- Pair --}}
                                 <td class="px-4 py-3">
-                                    <span class="font-bold text-zinc-900">{{ $request->from_currency }} → {{ $request->to_currency }}</span>
+                                    <span class="font-bold text-zinc-900 dark:text-white">{{ $request->from_currency }} → {{ $request->to_currency }}</span>
                                 </td>
 
                                 {{-- Poster --}}
                                 <td class="px-4 py-3">
                                     @if($request->is_anonymous)
-                                        <span class="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-500">
+                                        <span class="inline-flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-500 dark:bg-zinc-700 dark:text-zinc-400">
                                             Community Member
                                         </span>
                                     @else
-                                        <span class="text-zinc-700">{{ $request->user->name }}</span>
+                                        <span class="text-zinc-700 dark:text-zinc-200">{{ $request->user->name }}</span>
                                     @endif
                                 </td>
 
                                 {{-- Amounts --}}
-                                <td class="px-4 py-3 text-zinc-700">
-                                    <div class="font-medium">{{ number_format((float) $request->from_amount, 2) }} <span class="text-zinc-400">{{ $request->from_currency }}</span></div>
-                                    <div class="text-xs text-zinc-400">→ {{ number_format((float) $request->to_amount, 2) }} {{ $request->to_currency }}</div>
+                                <td class="px-4 py-3 text-zinc-700 dark:text-zinc-200">
+                                    <div class="font-medium">{{ number_format((float) $request->from_amount, 2) }} <span class="text-zinc-400 dark:text-zinc-500">{{ $request->from_currency }}</span></div>
+                                    <div class="text-xs text-zinc-400 dark:text-zinc-500">→ {{ number_format((float) $request->to_amount, 2) }} {{ $request->to_currency }}</div>
                                 </td>
 
                                 {{-- Rate + diff --}}
                                 <td class="px-4 py-3">
-                                    <div class="font-mono text-zinc-700">{{ number_format($offeredRate, 4) }}</div>
+                                    <div class="font-mono text-zinc-700 dark:text-zinc-200">{{ number_format($offeredRate, 4) }}</div>
                                     @if($rateDiff !== null)
-                                        <div class="text-xs font-medium {{ $rateDiff >= 0 ? 'text-green-600' : 'text-red-500' }}">
+                                        <div class="text-xs font-medium {{ $rateDiff >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400' }}">
                                             {{ $rateDiff >= 0 ? '+' : '' }}{{ number_format($rateDiff, 2) }}% vs live
                                         </div>
                                     @endif
                                 </td>
 
                                 {{-- Payment --}}
-                                <td class="px-4 py-3 text-sm text-zinc-600">
+                                <td class="px-4 py-3 text-sm text-zinc-600 dark:text-zinc-300">
                                     <div>↑ {{ $request->payment_method_sending }}</div>
-                                    <div class="text-zinc-400">↓ {{ $request->payment_method_receiving }}</div>
+                                    <div class="text-zinc-400 dark:text-zinc-500">↓ {{ $request->payment_method_receiving }}</div>
                                 </td>
 
                                 {{-- Interests --}}
                                 <td class="px-4 py-3 text-center">
-                                    <span class="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-600">
-                                        <flux:icon name="users" class="size-3.5 text-zinc-400" />
+                                    <span class="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-600 dark:text-zinc-300">
+                                        <flux:icon name="users" class="size-3.5 text-zinc-400 dark:text-zinc-500" />
                                         {{ $request->interests->count() }}
                                     </span>
                                 </td>
 
                                 {{-- Posted --}}
-                                <td class="px-4 py-3 text-sm text-zinc-500">
+                                <td class="px-4 py-3 text-sm text-zinc-500 dark:text-zinc-400">
                                     {{ $request->created_at->diffForHumans() }}
                                 </td>
 

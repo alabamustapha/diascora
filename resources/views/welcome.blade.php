@@ -31,21 +31,7 @@
             <div class="flex h-16 items-center justify-between">
                 {{-- Wordmark --}}
                 <a href="{{ route('home') }}" class="flex items-center gap-2">
-                    <div class="flex size-8 items-center justify-center rounded-md bg-navy-800">
-                        <svg class="size-5 fill-white" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="20" cy="20" r="6"/>
-                            <circle cx="6" cy="10" r="4"/>
-                            <circle cx="34" cy="10" r="4"/>
-                            <circle cx="6" cy="30" r="4"/>
-                            <circle cx="34" cy="30" r="4"/>
-                            <line x1="20" y1="14" x2="6" y2="10" stroke="white" stroke-width="2" fill="none"/>
-                            <line x1="20" y1="14" x2="34" y2="10" stroke="white" stroke-width="2" fill="none"/>
-                            <line x1="20" y1="26" x2="6" y2="30" stroke="white" stroke-width="2" fill="none"/>
-                            <line x1="20" y1="26" x2="34" y2="30" stroke="white" stroke-width="2" fill="none"/>
-                            <line x1="6" y1="10" x2="6" y2="30" stroke="white" stroke-width="1.5" fill="none"/>
-                            <line x1="34" y1="10" x2="34" y2="30" stroke="white" stroke-width="1.5" fill="none"/>
-                        </svg>
-                    </div>
+                    <img src="{{ asset('icon-192.png') }}" alt="Diascora" class="size-8 rounded-md object-cover">
                     <span class="text-lg font-bold tracking-tight text-navy-800">Diascora</span>
                 </a>
 
@@ -466,21 +452,7 @@
                 {{-- Brand column --}}
                 <div>
                     <a href="{{ route('home') }}" class="mb-4 flex items-center gap-2">
-                        <div class="flex size-8 items-center justify-center rounded-md bg-navy-800">
-                            <svg class="size-5 fill-white" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="20" cy="20" r="6"/>
-                                <circle cx="6" cy="10" r="4"/>
-                                <circle cx="34" cy="10" r="4"/>
-                                <circle cx="6" cy="30" r="4"/>
-                                <circle cx="34" cy="30" r="4"/>
-                                <line x1="20" y1="14" x2="6" y2="10" stroke="white" stroke-width="2" fill="none"/>
-                                <line x1="20" y1="14" x2="34" y2="10" stroke="white" stroke-width="2" fill="none"/>
-                                <line x1="20" y1="26" x2="6" y2="30" stroke="white" stroke-width="2" fill="none"/>
-                                <line x1="20" y1="26" x2="34" y2="30" stroke="white" stroke-width="2" fill="none"/>
-                                <line x1="6" y1="10" x2="6" y2="30" stroke="white" stroke-width="1.5" fill="none"/>
-                                <line x1="34" y1="10" x2="34" y2="30" stroke="white" stroke-width="1.5" fill="none"/>
-                            </svg>
-                        </div>
+                        <img src="{{ asset('icon-192.png') }}" alt="Diascora" class="size-8 rounded-md object-cover">
                         <span class="text-lg font-bold tracking-tight text-navy-800">Diascora</span>
                     </a>
                     <p class="max-w-xs text-sm leading-relaxed text-zinc-500">The exchange platform for diaspora communities in Rwanda.</p>

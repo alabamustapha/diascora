@@ -4,11 +4,11 @@
         @for ($i = 1; $i <= 2; $i++)
             <div class="flex items-center">
                 <div class="flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold
-                    {{ $step >= $i ? 'bg-navy-800 text-white' : 'bg-zinc-200 text-zinc-500' }}">
+                    {{ $step >= $i ? 'bg-navy-800 text-white' : 'bg-zinc-200 text-zinc-500 dark:bg-zinc-600 dark:text-zinc-400' }}">
                     {{ $i }}
                 </div>
                 @if ($i < 2)
-                    <div class="h-px w-10 {{ $step > $i ? 'bg-navy-800' : 'bg-zinc-200' }}"></div>
+                    <div class="h-px w-10 {{ $step > $i ? 'bg-navy-800' : 'bg-zinc-200 dark:bg-zinc-600' }}"></div>
                 @endif
             </div>
         @endfor
@@ -66,7 +66,7 @@
             <flux:error name="payment_method" />
         </flux:field>
 
-        <div class="flex justify-end gap-3 border-t border-zinc-100 pt-4">
+        <div class="flex justify-end gap-3 border-t border-zinc-100 pt-4 dark:border-zinc-700">
             <flux:button wire:click="$parent.showCreateModal = false" variant="ghost">{{ __('Cancel') }}</flux:button>
             <flux:button wire:click="nextStep" variant="primary">{{ __('Next') }} →</flux:button>
         </div>
@@ -94,13 +94,13 @@
         </flux:field>
 
         <div>
-            <flux:label>{{ __('Item photo') }} <span class="text-zinc-400">({{ __('optional') }})</span></flux:label>
+            <flux:label>{{ __('Item photo') }} <span class="text-zinc-400 dark:text-zinc-500">({{ __('optional') }})</span></flux:label>
             <div class="mt-1">
                 <input
                     type="file"
                     wire:model="item_image"
                     accept="image/*"
-                    class="block w-full text-sm text-zinc-500 file:mr-4 file:rounded-lg file:border-0 file:bg-navy-800 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-navy-700"
+                    class="block w-full text-sm text-zinc-500 file:mr-4 file:rounded-lg file:border-0 file:bg-navy-800 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-navy-700 dark:text-zinc-400"
                 />
                 <flux:error name="item_image" />
             </div>
@@ -122,7 +122,7 @@
             </flux:select>
         </flux:field>
 
-        <div class="flex justify-between gap-3 border-t border-zinc-100 pt-4">
+        <div class="flex justify-between gap-3 border-t border-zinc-100 pt-4 dark:border-zinc-700">
             <flux:button wire:click="prevStep" variant="ghost">← {{ __('Back') }}</flux:button>
             <flux:button wire:click="create" variant="primary" wire:loading.attr="disabled">
                 {{ __('Post Request') }}

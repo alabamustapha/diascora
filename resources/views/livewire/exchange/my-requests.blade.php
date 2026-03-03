@@ -37,9 +37,9 @@
 
     {{-- Empty state --}}
     @if($this->myRequests->isEmpty())
-        <div class="flex flex-1 items-center justify-center rounded-xl border border-zinc-200 py-20 text-center">
+        <div class="flex flex-1 items-center justify-center rounded-xl border border-zinc-200 py-20 text-center dark:border-zinc-700">
             <div>
-                <flux:icon name="clipboard-document-list" class="mx-auto mb-3 size-10 text-zinc-300" />
+                <flux:icon name="clipboard-document-list" class="mx-auto mb-3 size-10 text-zinc-300 dark:text-zinc-600" />
                 <flux:heading>
                     {{ $search || $filterStatus ? __('No requests match your filters') : __('No requests yet') }}
                 </flux:heading>
@@ -60,22 +60,22 @@
 
     {{-- Table --}}
     @else
-        <div class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm">
+        <div class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-800">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead>
-                        <tr class="border-b border-zinc-100 bg-zinc-50 text-left">
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Pair') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Sending → Receiving') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Rate') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Status') }}</th>
-                            <th class="px-4 py-3 text-center font-semibold text-zinc-600">{{ __('Interests') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Posted') }}</th>
-                            <th class="px-4 py-3 font-semibold text-zinc-600">{{ __('Expires') }}</th>
-                            <th class="px-4 py-3 text-right font-semibold text-zinc-600">{{ __('Actions') }}</th>
+                        <tr class="border-b border-zinc-100 bg-zinc-50 text-left dark:border-zinc-700 dark:bg-zinc-700">
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Pair') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Sending → Receiving') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Rate') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Status') }}</th>
+                            <th class="px-4 py-3 text-center font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Interests') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Posted') }}</th>
+                            <th class="px-4 py-3 font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Expires') }}</th>
+                            <th class="px-4 py-3 text-right font-semibold text-zinc-600 dark:text-zinc-300">{{ __('Actions') }}</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-zinc-100">
+                    <tbody class="divide-y divide-zinc-100 dark:divide-zinc-700">
                         @foreach($this->myRequests as $request)
                             @php
                                 $displayStatus = $this->displayStatus($request);
@@ -89,24 +89,24 @@
                                     default     => 'zinc',
                                 };
                             @endphp
-                            <tr wire:key="request-{{ $request->id }}" class="transition-colors odd:bg-white even:bg-zinc-50/50 hover:bg-navy-50">
+                            <tr wire:key="request-{{ $request->id }}" class="transition-colors odd:bg-white even:bg-zinc-50/50 hover:bg-navy-50 dark:odd:bg-zinc-800 dark:even:bg-zinc-700/30 dark:hover:bg-zinc-700">
 
                                 {{-- Pair --}}
                                 <td class="px-4 py-3">
-                                    <span class="font-bold text-zinc-900">{{ $request->from_currency }} → {{ $request->to_currency }}</span>
+                                    <span class="font-bold text-zinc-900 dark:text-white">{{ $request->from_currency }} → {{ $request->to_currency }}</span>
                                     @if($request->is_anonymous)
-                                        <div class="mt-0.5 text-xs text-zinc-400">{{ __('Anonymous') }}</div>
+                                        <div class="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">{{ __('Anonymous') }}</div>
                                     @endif
                                 </td>
 
                                 {{-- Amounts --}}
-                                <td class="px-4 py-3 text-zinc-700">
-                                    <div class="font-medium">{{ number_format((float) $request->from_amount, 2) }} <span class="text-zinc-400">{{ $request->from_currency }}</span></div>
-                                    <div class="text-xs text-zinc-400">→ {{ number_format((float) $request->to_amount, 2) }} {{ $request->to_currency }}</div>
+                                <td class="px-4 py-3 text-zinc-700 dark:text-zinc-200">
+                                    <div class="font-medium">{{ number_format((float) $request->from_amount, 2) }} <span class="text-zinc-400 dark:text-zinc-500">{{ $request->from_currency }}</span></div>
+                                    <div class="text-xs text-zinc-400 dark:text-zinc-500">→ {{ number_format((float) $request->to_amount, 2) }} {{ $request->to_currency }}</div>
                                 </td>
 
                                 {{-- Rate --}}
-                                <td class="px-4 py-3 font-mono text-zinc-700">
+                                <td class="px-4 py-3 font-mono text-zinc-700 dark:text-zinc-200">
                                     {{ number_format((float) $request->offered_rate, 4) }}
                                 </td>
 
@@ -119,24 +119,24 @@
                                 <td class="px-4 py-3 text-center">
                                     <button
                                         wire:click="viewDetails({{ $request->id }})"
-                                        class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100"
+                                        class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-700"
                                     >
-                                        <flux:icon name="users" class="size-3.5 text-zinc-400" />
+                                        <flux:icon name="users" class="size-3.5 text-zinc-400 dark:text-zinc-500" />
                                         {{ $request->interests->count() }}
                                     </button>
                                 </td>
 
                                 {{-- Posted --}}
-                                <td class="px-4 py-3 text-xs text-zinc-500">
+                                <td class="px-4 py-3 text-xs text-zinc-500 dark:text-zinc-400">
                                     {{ $request->created_at->diffForHumans() }}
                                 </td>
 
                                 {{-- Expires --}}
-                                <td class="px-4 py-3 text-xs {{ $isExpired ? 'font-medium text-amber-600' : 'text-zinc-500' }}">
+                                <td class="px-4 py-3 text-xs {{ $isExpired ? 'font-medium text-amber-600' : 'text-zinc-500 dark:text-zinc-400' }}">
                                     @if($request->expires_at)
                                         {{ $request->expires_at->diffForHumans() }}
                                     @else
-                                        <span class="text-zinc-300">—</span>
+                                        <span class="text-zinc-300 dark:text-zinc-600">—</span>
                                     @endif
                                 </td>
 
@@ -214,33 +214,33 @@
                 </div>
 
                 {{-- Request summary --}}
-                <div class="grid gap-3 rounded-lg bg-zinc-50 p-4 text-sm sm:grid-cols-2">
+                <div class="grid gap-3 rounded-lg bg-zinc-50 p-4 text-sm sm:grid-cols-2 dark:bg-zinc-700/50">
                     <div>
-                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('Sending') }}</div>
-                        <div class="font-semibold text-zinc-900">{{ number_format((float) $req->from_amount, 2) }} {{ $req->from_currency }}</div>
+                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{{ __('Sending') }}</div>
+                        <div class="font-semibold text-zinc-900 dark:text-white">{{ number_format((float) $req->from_amount, 2) }} {{ $req->from_currency }}</div>
                     </div>
                     <div>
-                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('Receiving') }}</div>
-                        <div class="font-semibold text-zinc-900">{{ number_format((float) $req->to_amount, 2) }} {{ $req->to_currency }}</div>
+                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{{ __('Receiving') }}</div>
+                        <div class="font-semibold text-zinc-900 dark:text-white">{{ number_format((float) $req->to_amount, 2) }} {{ $req->to_currency }}</div>
                     </div>
                     <div>
-                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('Offered Rate') }}</div>
-                        <div class="font-mono text-zinc-900">{{ number_format((float) $req->offered_rate, 4) }}</div>
+                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{{ __('Offered Rate') }}</div>
+                        <div class="font-mono text-zinc-900 dark:text-white">{{ number_format((float) $req->offered_rate, 4) }}</div>
                     </div>
                     <div>
-                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('Payment Methods') }}</div>
-                        <div class="text-zinc-700">{{ $req->payment_method_sending }} / {{ $req->payment_method_receiving }}</div>
+                        <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{{ __('Payment Methods') }}</div>
+                        <div class="text-zinc-700 dark:text-zinc-200">{{ $req->payment_method_sending }} / {{ $req->payment_method_receiving }}</div>
                     </div>
                     @if($req->expires_at)
                         <div>
-                            <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('Expires') }}</div>
-                            <div class="{{ $detailExpired ? 'font-medium text-amber-600' : 'text-zinc-700' }}">{{ $req->expires_at->diffForHumans() }}</div>
+                            <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{{ __('Expires') }}</div>
+                            <div class="{{ $detailExpired ? 'font-medium text-amber-600' : 'text-zinc-700 dark:text-zinc-200' }}">{{ $req->expires_at->diffForHumans() }}</div>
                         </div>
                     @endif
                     @if($req->notes)
                         <div class="sm:col-span-2">
-                            <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400">{{ __('Notes') }}</div>
-                            <div class="text-zinc-700">{{ $req->notes }}</div>
+                            <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{{ __('Notes') }}</div>
+                            <div class="text-zinc-700 dark:text-zinc-200">{{ $req->notes }}</div>
                         </div>
                     @endif
                 </div>
@@ -249,12 +249,12 @@
                 @if($req->status === 'matched' && $this->canSeeContact($req))
                     @php $peer = $req->acceptedInterest?->user; @endphp
                     @if($peer)
-                        <div class="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3">
+                        <div class="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 dark:border-blue-800 dark:bg-blue-900/20">
                             <div class="mb-2 flex items-center gap-2">
                                 <flux:icon name="check-circle" class="size-4 text-blue-600" />
-                                <span class="text-sm font-semibold text-blue-800">{{ __('Matched! Contact details:') }}</span>
+                                <span class="text-sm font-semibold text-blue-800 dark:text-blue-300">{{ __('Matched! Contact details:') }}</span>
                             </div>
-                            <div class="grid gap-1 text-sm text-blue-900">
+                            <div class="grid gap-1 text-sm text-blue-900 dark:text-blue-100">
                                 <div><span class="font-medium">{{ __('Name') }}:</span> {{ $peer->name }}</div>
                                 <div><span class="font-medium">{{ __('Email') }}:</span> {{ $peer->email }}</div>
                                 @if($peer->phone_number)
@@ -281,23 +281,23 @@
                     </div>
 
                     @if($req->interests->isEmpty())
-                        <flux:text class="text-sm text-zinc-400">{{ __('No one has expressed interest yet.') }}</flux:text>
+                        <flux:text class="text-sm text-zinc-400 dark:text-zinc-500">{{ __('No one has expressed interest yet.') }}</flux:text>
                     @else
                         <div class="space-y-3">
                             @foreach($req->interests as $interest)
                                 <div
                                     wire:key="modal-interest-{{ $interest->id }}"
-                                    class="flex items-start gap-4 rounded-lg border p-4 {{ $interest->status === 'accepted' ? 'border-green-200 bg-green-50' : ($interest->status === 'rejected' ? 'border-zinc-100 bg-zinc-50 opacity-60' : 'border-zinc-200') }}"
+                                    class="flex items-start gap-4 rounded-lg border p-4 {{ $interest->status === 'accepted' ? 'border-green-200 bg-green-50' : ($interest->status === 'rejected' ? 'border-zinc-100 bg-zinc-50 opacity-60 dark:border-zinc-700 dark:bg-zinc-700/50' : 'border-zinc-200 dark:border-zinc-700') }}"
                                 >
                                     <div class="min-w-0 flex-1">
                                         <div class="flex flex-wrap items-center gap-2">
-                                            <span class="font-medium text-zinc-900">{{ $interest->user->name }}</span>
+                                            <span class="font-medium text-zinc-900 dark:text-white">{{ $interest->user->name }}</span>
                                             <flux:badge size="sm" color="{{ match($interest->status) { 'accepted' => 'green', 'rejected' => 'zinc', default => 'yellow' } }}">
                                                 {{ ucfirst($interest->status) }}
                                             </flux:badge>
                                         </div>
-                                        <p class="mt-1 text-sm text-zinc-600">{{ $interest->comment }}</p>
-                                        <div class="mt-1 text-xs text-zinc-400">
+                                        <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-300">{{ $interest->comment }}</p>
+                                        <div class="mt-1 text-xs text-zinc-400 dark:text-zinc-500">
                                             {{ __('Sends via') }}: {{ $interest->payment_method_sending }}
                                             · {{ __('Receives via') }}: {{ $interest->payment_method_receiving }}
                                         </div>
@@ -318,7 +318,7 @@
                 </div>
 
                 {{-- Modal footer --}}
-                <div class="flex items-center justify-between gap-3 border-t border-zinc-100 pt-4">
+                <div class="flex items-center justify-between gap-3 border-t border-zinc-100 pt-4 dark:border-zinc-700">
                     <div class="flex gap-2">
                         <flux:button
                             wire:click="relistRequest({{ $req->id }})"

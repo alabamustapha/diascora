@@ -4,11 +4,11 @@
         @for ($i = 1; $i <= 3; $i++)
             <div class="flex items-center">
                 <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold
-                    {{ $step >= $i ? 'bg-navy-800 text-white' : 'bg-zinc-200 text-zinc-500' }}">
+                    {{ $step >= $i ? 'bg-navy-800 text-white' : 'bg-zinc-200 text-zinc-500 dark:bg-zinc-600 dark:text-zinc-400' }}">
                     {{ $i }}
                 </div>
                 @if ($i < 3)
-                    <div class="h-px w-10 {{ $step > $i ? 'bg-navy-800' : 'bg-zinc-200' }}"></div>
+                    <div class="h-px w-10 {{ $step > $i ? 'bg-navy-800' : 'bg-zinc-200 dark:bg-zinc-600' }}"></div>
                 @endif
             </div>
         @endfor
@@ -44,14 +44,14 @@
         </div>
 
         @if ($official_rate)
-            <div class="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm">
-                <span class="text-zinc-500">{{ __('Live official rate') }}: </span>
-                <span class="font-semibold text-zinc-900">1 {{ $from_currency }} = {{ number_format((float) $official_rate, 4) }} {{ $to_currency }}</span>
-                <span class="ml-2 text-xs text-zinc-400">({{ __('cached, updates hourly') }})</span>
+            <div class="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm dark:border-zinc-700 dark:bg-zinc-700/50">
+                <span class="text-zinc-500 dark:text-zinc-400">{{ __('Live official rate') }}: </span>
+                <span class="font-semibold text-zinc-900 dark:text-white">1 {{ $from_currency }} = {{ number_format((float) $official_rate, 4) }} {{ $to_currency }}</span>
+                <span class="ml-2 text-xs text-zinc-400 dark:text-zinc-500">({{ __('cached, updates hourly') }})</span>
             </div>
         @endif
 
-        <div class="flex justify-end gap-3 border-t border-zinc-100 pt-4">
+        <div class="flex justify-end gap-3 border-t border-zinc-100 pt-4 dark:border-zinc-700">
             <flux:button wire:click="$parent.showCreateModal = false" variant="ghost">{{ __('Cancel') }}</flux:button>
             <flux:button wire:click="nextStep" variant="primary">{{ __('Next') }} →</flux:button>
         </div>
@@ -81,7 +81,7 @@
         @if ($offered_rate && $official_rate)
             <div class="rounded-lg border px-4 py-3 text-sm {{ $this->rateDiffPercent >= 0 ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50' }}">
                 <div class="flex items-center justify-between">
-                    <span class="text-zinc-600">{{ __('Your offered rate') }}: <span class="font-semibold text-zinc-900">{{ number_format((float) $offered_rate, 4) }}</span></span>
+                    <span class="text-zinc-600 dark:text-zinc-300">{{ __('Your offered rate') }}: <span class="font-semibold text-zinc-900 dark:text-white">{{ number_format((float) $offered_rate, 4) }}</span></span>
                     @if ($this->rateDiffPercent !== null)
                         <span class="{{ $this->rateDiffPercent >= 0 ? 'text-green-700' : 'text-red-600' }} font-medium">
                             {{ $this->rateDiffPercent >= 0 ? '+' : '' }}{{ number_format($this->rateDiffPercent, 2) }}% {{ __('vs official') }}
@@ -115,7 +115,7 @@
             </flux:field>
         </div>
 
-        <div class="flex justify-between gap-3 border-t border-zinc-100 pt-4">
+        <div class="flex justify-between gap-3 border-t border-zinc-100 pt-4 dark:border-zinc-700">
             <flux:button wire:click="prevStep" variant="ghost">← {{ __('Back') }}</flux:button>
             <flux:button wire:click="nextStep" variant="primary">{{ __('Next') }} →</flux:button>
         </div>
@@ -129,25 +129,25 @@
         </div>
 
         {{-- Summary card --}}
-        <div class="rounded-lg border border-zinc-200 bg-zinc-50 divide-y divide-zinc-200 text-sm">
+        <div class="rounded-lg border border-zinc-200 bg-zinc-50 divide-y divide-zinc-200 text-sm dark:border-zinc-700 dark:bg-zinc-700/50 dark:divide-zinc-600">
             <div class="flex items-center justify-between px-4 py-2">
-                <span class="text-zinc-500">{{ __('Currency pair') }}</span>
-                <span class="font-semibold text-zinc-900">{{ $from_currency }} → {{ $to_currency }}</span>
+                <span class="text-zinc-500 dark:text-zinc-400">{{ __('Currency pair') }}</span>
+                <span class="font-semibold text-zinc-900 dark:text-white">{{ $from_currency }} → {{ $to_currency }}</span>
             </div>
             <div class="flex items-center justify-between px-4 py-2">
-                <span class="text-zinc-500">{{ __('Amounts') }}</span>
-                <span class="font-semibold text-zinc-900">{{ number_format((float) $from_amount, 2) }} {{ $from_currency }} → {{ number_format((float) $to_amount, 2) }} {{ $to_currency }}</span>
+                <span class="text-zinc-500 dark:text-zinc-400">{{ __('Amounts') }}</span>
+                <span class="font-semibold text-zinc-900 dark:text-white">{{ number_format((float) $from_amount, 2) }} {{ $from_currency }} → {{ number_format((float) $to_amount, 2) }} {{ $to_currency }}</span>
             </div>
             @if ($official_rate)
                 <div class="flex items-center justify-between px-4 py-2">
-                    <span class="text-zinc-500">{{ __('Official rate') }}</span>
-                    <span class="font-medium text-zinc-700">{{ number_format((float) $official_rate, 4) }}</span>
+                    <span class="text-zinc-500 dark:text-zinc-400">{{ __('Official rate') }}</span>
+                    <span class="font-medium text-zinc-700 dark:text-zinc-200">{{ number_format((float) $official_rate, 4) }}</span>
                 </div>
             @endif
             @if ($offered_rate)
                 <div class="flex items-center justify-between px-4 py-2">
-                    <span class="text-zinc-500">{{ __('Your offered rate') }}</span>
-                    <span class="font-semibold text-zinc-900">
+                    <span class="text-zinc-500 dark:text-zinc-400">{{ __('Your offered rate') }}</span>
+                    <span class="font-semibold text-zinc-900 dark:text-white">
                         {{ number_format((float) $offered_rate, 4) }}
                         @if ($this->rateDiffPercent !== null)
                             <span class="ml-1 text-xs {{ $this->rateDiffPercent >= 0 ? 'text-green-700' : 'text-red-600' }}">
@@ -158,14 +158,14 @@
                 </div>
             @endif
             <div class="flex items-center justify-between px-4 py-2">
-                <span class="text-zinc-500">{{ __('Payment') }}</span>
-                <span class="font-medium text-zinc-700">{{ $payment_method_sending }} → {{ $payment_method_receiving }}</span>
+                <span class="text-zinc-500 dark:text-zinc-400">{{ __('Payment') }}</span>
+                <span class="font-medium text-zinc-700 dark:text-zinc-200">{{ $payment_method_sending }} → {{ $payment_method_receiving }}</span>
             </div>
         </div>
 
         {{-- Notes --}}
         <flux:field>
-            <flux:label>{{ __('Notes') }} <span class="text-zinc-400">({{ __('optional') }})</span></flux:label>
+            <flux:label>{{ __('Notes') }} <span class="text-zinc-400 dark:text-zinc-500">({{ __('optional') }})</span></flux:label>
             <flux:textarea wire:model="notes" rows="2" placeholder="{{ __('Any extra details for interested peers...') }}" />
             <flux:error name="notes" />
         </flux:field>
@@ -188,7 +188,7 @@
             </div>
         </div>
 
-        <div class="flex justify-between gap-3 border-t border-zinc-100 pt-4">
+        <div class="flex justify-between gap-3 border-t border-zinc-100 pt-4 dark:border-zinc-700">
             <flux:button wire:click="prevStep" variant="ghost">← {{ __('Back') }}</flux:button>
             <flux:button wire:click="create" variant="primary" wire:loading.attr="disabled">
                 {{ __('Post Request') }}
