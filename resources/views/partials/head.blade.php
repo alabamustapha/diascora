@@ -16,3 +16,8 @@
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @fluxAppearance
+<script>
+    if (!window.localStorage.getItem('flux.appearance')) {
+        window.Flux.applyAppearance('light')
+    }
+</script>
