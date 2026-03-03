@@ -38,7 +38,21 @@
 
             <flux:spacer />
 
-            <livewire:notification-bell />
+            <div class="flex items-center gap-1">
+                <livewire:notification-bell />
+
+                <div x-data>
+                    <flux:button
+                        variant="ghost"
+                        square
+                        x-on:click="$flux.appearance = $flux.dark ? 'light' : 'dark'"
+                        aria-label="Toggle appearance"
+                    >
+                        <flux:icon x-show="$flux.dark" name="sun" variant="outline" class="size-5" />
+                        <flux:icon x-show="!$flux.dark" name="moon" variant="outline" class="size-5" />
+                    </flux:button>
+                </div>
+            </div>
 
             <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
         </flux:sidebar>
@@ -50,6 +64,18 @@
             <flux:spacer />
 
             <livewire:notification-bell />
+
+            <div x-data>
+                <flux:button
+                    variant="ghost"
+                    square
+                    x-on:click="$flux.appearance = $flux.dark ? 'light' : 'dark'"
+                    aria-label="Toggle appearance"
+                >
+                    <flux:icon x-show="$flux.dark" name="sun" variant="outline" class="size-5" />
+                    <flux:icon x-show="!$flux.dark" name="moon" variant="outline" class="size-5" />
+                </flux:button>
+            </div>
 
             <flux:dropdown position="top" align="end">
                 <flux:profile
