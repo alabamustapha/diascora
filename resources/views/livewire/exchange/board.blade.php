@@ -116,7 +116,7 @@
                                 </td>
 
                                 {{-- Payment --}}
-                                <td class="px-4 py-3 text-xs text-zinc-600">
+                                <td class="px-4 py-3 text-sm text-zinc-600">
                                     <div>↑ {{ $request->payment_method_sending }}</div>
                                     <div class="text-zinc-400">↓ {{ $request->payment_method_receiving }}</div>
                                 </td>
@@ -130,7 +130,7 @@
                                 </td>
 
                                 {{-- Posted --}}
-                                <td class="px-4 py-3 text-xs text-zinc-500">
+                                <td class="px-4 py-3 text-sm text-zinc-500">
                                     {{ $request->created_at->diffForHumans() }}
                                 </td>
 

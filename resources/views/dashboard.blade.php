@@ -150,7 +150,7 @@
                                             {{ $request->interests->count() }}
                                         </span>
                                     </td>
-                                    <td class="px-5 py-3 text-xs text-zinc-500">{{ $request->created_at->diffForHumans() }}</td>
+                                    <td class="px-5 py-3 text-sm text-zinc-500">{{ $request->created_at->diffForHumans() }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -218,7 +218,7 @@
                                             {{ $request->interests->count() }}
                                         </span>
                                     </td>
-                                    <td class="px-5 py-3 text-xs text-zinc-500">{{ $request->created_at->diffForHumans() }}</td>
+                                    <td class="px-5 py-3 text-sm text-zinc-500">{{ $request->created_at->diffForHumans() }}</td>
                                     <td class="px-5 py-3 text-right">
                                         <flux:button :href="route('exchange.board')" size="sm" variant="primary" wire:navigate>
                                             {{ __("I'm Interested") }}
